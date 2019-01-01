@@ -1,2 +1,2 @@
-# ShopShop-api-with-express-sequalize-mysql
-Learn Buil RestAPI with express js, sequalize, mysql
+# ShopShop-api-with-express-sequelize-mysql
+Learn Buil RestAPI with express js, sequelize, mysql

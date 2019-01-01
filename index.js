@@ -1,6 +1,7 @@
+require('dotenv').config()
+
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 3000
 const router = require('./app/router')
 
 app.get('',(req,res) => {
@@ -8,6 +9,6 @@ app.get('',(req,res) => {
 })
 app.use(router)
 
-app.listen(port,() => {
+app.listen(process.env.PORT,() => {
   console.log('server is running...')
 })

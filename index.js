@@ -10,5 +10,5 @@ app.get('',(req,res) => {
 app.use(router)
 
 app.listen(process.env.PORT,() => {
-  console.log('server is running...')
+  console.log('Listening on '+process.env.PORT)
 })

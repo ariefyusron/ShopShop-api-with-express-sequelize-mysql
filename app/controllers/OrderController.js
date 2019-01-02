@@ -25,9 +25,43 @@ exports.store = (req,res,next) => {
 }
 
 exports.update = (req,res) => {
-  res.json('Update order: '+req.params.id)
+  models.Orders.findById(req.params.id)
+    .then((order) => {
+      if(!order){
+        res.status(404).json({
+          message: 'Data not found to update'
+        })
+      }
+
+      order.update(req.body)
+        .then((result) => {
+          res.json(result)
+        })
+    }).catch((next) => {
+      res.status(500).json({
+        field: next.errors[0].path,
+        message: next.errors[0].message
+      })
+    })
 }
 
 exports.delete = (req,res) => {
-  res.json('Delete order: '+req.params.id)
+  models.Orders.findById(req.params.id)
+    .then((order) => {
+      if(!order){
+        res.status(404).json({
+          message: 'Data not found to delete'
+        })
+      }
+
+      order.destroy(req.params.id)
+        .then((result) => {
+          res.json(result)
+        })
+    }).catch((next) => {
+      res.status(500).json({
+        field: next.errors[0].path,
+        message: next.errors[0].message
+      })
+    })
 }

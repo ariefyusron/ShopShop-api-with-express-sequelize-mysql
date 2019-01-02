@@ -1,7 +1,12 @@
 const models = require('../../models')
 
 exports.index = (req,res) => {
-  models.Orders.findAll({include: [{model: models.Products},{model: models.Transactions}]})
+  models.Orders.findAll({
+    include: [
+      {model: models.Products},
+      {model: models.Transactions}
+    ]
+  })
     .then((results) => {
       res.json(results)
     })

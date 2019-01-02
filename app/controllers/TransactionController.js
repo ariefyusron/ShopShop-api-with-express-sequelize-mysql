@@ -1,5 +1,3 @@
-const express = require('express')
-
 exports.store = (req,res) => {
   res.json('Store transaction')
 }

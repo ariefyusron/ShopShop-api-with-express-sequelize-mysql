@@ -1,15 +1,39 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Orders = sequelize.define('Orders', {
-    product_id: DataTypes.INTEGER,
-    transaction_id: DataTypes.INTEGER,
-    qty: DataTypes.INTEGER,
-    price: DataTypes.INTEGER
+    product_id: {
+      type: DataTypes.INTEGER,
+      validator: {
+        isInt: true
+      }
+    },
+    transaction_id: {
+      type: DataTypes.INTEGER,
+      validator: {
+        isInt: true
+      }
+    },
+    qty: {
+      type: DataTypes.INTEGER,
+      validator: {
+        isInt: true
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      validator: {
+        isInt: true
+      }
+    }
   }, {});
   Orders.associate = function(models) {
     // associations can be defined here
-    Orders.belongsTo(models.Products),
-    Orders.belongsTo(models.Transactions)
+    Orders.belongsTo(models.Products, {
+      foreignKey:'product_id'
+    }),
+    Orders.belongsTo(models.Transactions, {
+      foreignKey:'transaction_id'
+    })
   };
   return Orders;
 };

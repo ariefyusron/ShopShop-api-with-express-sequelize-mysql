@@ -1,11 +1,23 @@
 const express = require('express')
+const models = require('../../models')
 
 exports.index = (req,res) => {
-  res.json('orders')
+  models.Orders.findAll({include: [{model: models.Products},{model: models.Transactions}]})
+    .then((results) => {
+      res.json(results)
+    })
 }
 
-exports.store = (req,res) => {
-  res.json('Store Order')
+exports.store = (req,res,next) => {
+  models.Orders.create(req.body)
+    .then((results) => {
+      res.json(results)
+    }).catch((next) => {
+      res.status(500).json({
+        field: next.errors[0].path,
+        message: next.errors[0].message
+      })
+    })
 }
 
 exports.update = (req,res) => {

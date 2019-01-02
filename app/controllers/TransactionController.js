@@ -1,7 +1,20 @@
+const models = require('../../models')
+
 exports.store = (req,res) => {
-  res.json('Store transaction')
+  models.Transactions.create(req.body)
+    .then((results) => {
+      res.json(results)
+    }).catch((next) => {
+      res.status(500).json({
+        field: next.errors[0].path,
+        message: next.errors[0].message
+      })
+    })
 }
 
 exports.show = (req,res) => {
-  res.json('transaction: '+req.params.id)
+  models.Transactions.findById(req.params.id)
+    .then((results) => {
+      res.json(results)
+    })
 }

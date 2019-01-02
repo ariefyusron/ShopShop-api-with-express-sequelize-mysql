@@ -3,8 +3,8 @@ const models = require('../../models')
 exports.index = (req,res) => {
   models.Orders.findAll({
     include: [
-      {model: models.Products},
-      {model: models.Transactions}
+      models.Products,
+      models.Transactions
     ]
   })
     .then((results) => {

@@ -13,7 +13,17 @@ exports.store = (req,res) => {
 }
 
 exports.show = (req,res) => {
-  models.Transactions.findById(req.params.id)
+  models.Transactions.findAll({
+    where:{
+      id: req.params.id
+    },
+    include: [{
+      model: models.Orders,
+      include: [
+        models.Products
+      ]
+    }]
+  })
     .then((results) => {
       res.json(results)
     })

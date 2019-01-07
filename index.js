@@ -1,8 +1,8 @@
-require('dotenv').config()
-
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const port = process.env.PORT
+
 const router = require('./app/router')
 
 app.get('',(req,res) => {
@@ -11,6 +11,6 @@ app.get('',(req,res) => {
 app.use(bodyParser.json())
 app.use(router)
 
-app.listen(process.env.PORT,() => {
-  console.log('Listening on '+process.env.PORT)
+app.listen(port,() => {
+  console.log('Listening on '+port)
 })
